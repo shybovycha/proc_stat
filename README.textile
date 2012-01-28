@@ -1,0 +1,18 @@
+h1. proc_stat
+
+This project outputs some stats of each process running to the X window.
+
+It uses Xlib for window handling and Qt for data processing (yeah, it sounds non-sense but the job is done well!).
+
+To compile and run this you'll need "Qt4":http://developer.qt.nokia.com/ libraries and Unix-like OS to link application with "Xlib":http://en.wikipedia.org/wiki/Xlib .
+
+h2. Compiling
+
+First of all, make sure you've got Qt libraries installed. On my Ubuntu laptop i usually use something like this: *sudo apt-get install qt4-dev-tools*.
+Whoa! And you'll need Xlib development files, as well: *sudo apt-get install libx11-dev*.
+
+Then, go to the _qtmain-build-desktop/_ directory and simply run *make*.
+
+h2. Modifying
+
+If you need something more then providen, you can always modify source code by yourself! For example, to show _TTY number_ or _uptime_ for each process, you should modify regular expression and form a new string for _QStringList result_ list within the _void stat()_ function.
