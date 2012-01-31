@@ -33,11 +33,11 @@ QStringList stat()
         QTextStream in(&file);
         QString data = in.readAll();
 
-        QRegExp re("(\\d+)\\s+\\((.+)\\)\\s+([RSDZTW])\\s+");
+        QRegExp re("(\\d+)\\s+\\((.+)\\)\\s+([RSDZTW])\\s+(-?\\d+\\s+){10}(\\d+)");
 
         if (re.indexIn(data) != -1)
         {
-            result << QString("PID: %1    CMD: %2    STATE: %3").arg(re.cap(1)).arg(re.cap(2)).arg(re.cap(3)).toStdString().c_str();
+            result << QString("PID: %1    CMD: %2    STATE: %3    UTIME: %4").arg(re.cap(1)).arg(re.cap(2)).arg(re.cap(3)).arg(re.cap(5)).toStdString().c_str();
         }
     }
 
@@ -181,8 +181,7 @@ int main( int argc, char * argv[] )
             break;
 
 
-        case ButtonPress:
-        case KeyPress:
+        case DestroyNotify:
             XUnloadFont(display, font_info->fid);
             XFreeGC(display, gc);
             XCloseDisplay(display);
